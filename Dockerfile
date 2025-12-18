@@ -1,40 +1,24 @@
-# ================================
+# ==============================
 # Stage 1: Build the application
-# ================================
-FROM eclipse-temurin:17-jdk-focal AS builder
+# ==============================
+FROM maven:3.9.6-eclipse-temurin-17 AS builder
 
-# Set working directory
 WORKDIR /app
 
-# Copy Gradle files
-COPY gradlew .
-COPY gradle gradle
-COPY build.gradle .
-COPY settings.gradle .
+COPY pom.xml .
+RUN mvn dependency:go-offline
 
-# Copy source code
-COPY src src
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-# Give execute permission to gradlew
-RUN chmod +x gradlew
-
-# Build executable JAR (skip tests for faster build)
-RUN ./gradlew bootJar -x test
-
-
-# ================================
+# ==============================
 # Stage 2: Run the application
-# ================================
+# ==============================
 FROM eclipse-temurin:17-jre-focal
 
-# Set working directory
 WORKDIR /app
+COPY --from=builder /app/target/*.jar app.jar
 
-# Copy jar from builder stage
-COPY --from=builder /app/build/libs/*.jar app.jar
-
-# Expose application port
 EXPOSE 8080
+ENTRYPOINT ["java","-jar","app.jar"]
 
-# Run Spring Boot app
-ENTRYPOINT ["java", "-jar", "app.jar"]
