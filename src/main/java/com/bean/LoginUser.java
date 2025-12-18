@@ -3,12 +3,16 @@ package com.bean;
 
 import java.time.LocalDateTime;
 
+import org.springframework.stereotype.Component;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
 
+
+@Component
 @Data
 @Entity
 public class LoginUser {
