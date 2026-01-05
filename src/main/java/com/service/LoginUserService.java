@@ -7,7 +7,7 @@ import java.util.Random;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.bean.LoginUser;
-import com.bean.Repository.LoginUserRepository;
+import com.repository.LoginUserRepository;
 
 @Service
 public class LoginUserService {

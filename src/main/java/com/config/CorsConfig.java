@@ -53,7 +53,8 @@ public class CorsConfig {
         http
                 .csrf(csrf -> csrf.disable()) 
                 .authorizeHttpRequests(auth -> auth
-                		.requestMatchers("/Save", "/loginUser", "/login", "/SignUp", "/verify-otp").permitAll()
+                		.requestMatchers("/Save", "/loginUser", "/login", "/SignUp", "/verify-otp","/reg" ).permitAll()
+//                		.requestMatchers("/kyc/**").authenticated()
                      
                         .anyRequest()
                         .authenticated() 

@@ -20,6 +20,23 @@ public class LoginUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
+    
+    private String email;
+    private String phone;
+    
+    private String password;
+    private String role="User";
+    
+    private String otp;
+    
+    private LocalDateTime lastOtpSent;    // Pichla OTP kab bheja
+    private int failedAttempts = 0;       // Kitni baar galat OTP dala
+    private LocalDateTime lockUntil;      // Kab tak account lock hai
+    private LocalDateTime otpExpiry;      // OTP kab khatam hoga
+    
+    
+    
     public int getId() {
 		return id;
 	}
@@ -80,19 +97,6 @@ public class LoginUser {
 	public void setOtpExpiry(LocalDateTime otpExpiry) {
 		this.otpExpiry = otpExpiry;
 	}
-	private String email;
-    private String phone;
-    
-    private String password;
-    private String role="User";
-    
-    private String otp;
-    
-    private LocalDateTime lastOtpSent;    // Pichla OTP kab bheja
-    private int failedAttempts = 0;       // Kitni baar galat OTP dala
-    private LocalDateTime lockUntil;      // Kab tak account lock hai
-    private LocalDateTime otpExpiry;      // OTP kab khatam hoga
-    
-    
+	
     
 }
